@@ -6,7 +6,7 @@ class PythonOrgSearch(unittest.TestCase):
     """A sample test class to show how page object works"""
 
     def setUp(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome()
         self.driver.get("http://www.python.org")
 
     def test_search_in_python_org(self):
