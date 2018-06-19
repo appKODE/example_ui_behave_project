@@ -16,9 +16,14 @@ class SimpleTests(unittest.TestCase):
         desired_caps['platformName'] = 'Android'
         desired_caps['platformVersion'] = '7.0'
         desired_caps['deviceName'] = 'Android Emulator'
-        desired_caps['app'] = PATH('Utair*.apk')
+        desired_caps['app'] = PATH('/home/kode/android-ut-builds/Utair*.apk')
 
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
 
     def tearDown(self):
         self.driver.quit()
+
+    def test_find_elements(self):
+        sleep(5)
+        el = self.driver.find_element_by_id('com.appkode.utair.dev:id/onboardingPageImage')
+        print(el)
