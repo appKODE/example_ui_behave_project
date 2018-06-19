@@ -10,7 +10,7 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
-class SimpleTests(unittest.TestCase):
+class TestUM():
     def setUp(self):
         desired_caps = {}
         desired_caps['platformName'] = 'Android'
