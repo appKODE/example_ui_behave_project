@@ -1,7 +1,7 @@
 import os
 from time import sleep
 
-import unittest
+import pytest
 
 from appium import webdriver
 
@@ -26,4 +26,3 @@ class SimpleTests(unittest.TestCase):
     def test_find_elements(self):
         sleep(5)
         el = self.driver.find_element_by_id('com.appkode.utair.dev:id/onboardingPageImage')
-        print(el)
