@@ -20,5 +20,5 @@ test:
    - qa-serv
   script:
    - pip install -r requirements.txt
-   - python3 main.py
+   - pytest -v main.py
 
