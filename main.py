@@ -22,10 +22,10 @@ class UITestsDriver:
 
 
 class TestUM:
-    def setUp(self):
+    def setup_class(self):
         self.uidriver = UITestsDriver()
 
-    def tearDown(self):
+    def teardown_class(self):
         self.uidriver.driver.quit()
 
     def test_find_elements(self):
