@@ -16,5 +16,6 @@ test:
    - qa-appium
   script:
    - python3 -m pip install -r requirements.txt
+   - appium
    - python3 -m pytest -v main.py
 
