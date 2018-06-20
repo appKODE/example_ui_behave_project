@@ -18,7 +18,7 @@ class UITestsDriver:
         desired_caps['deviceName'] = 'Android Emulator'
         desired_caps['app'] = PATH('/home/kode/android-ut-builds/Utair*.apk')
 
-        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+        self.driver = webdriver.Remote('http://192.168.100.95:4723/wd/hub', desired_caps)
 
 
 class TestUM:
