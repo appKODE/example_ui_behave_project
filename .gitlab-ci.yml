@@ -13,6 +13,6 @@ test:
   tags:
    - qa-appium
   script:
-   - pip install -r requirements.txt
-   - pytest -v main.py
+   - python3 -m pip install -r requirements.txt
+   - python3 -m pytest -v main.py
 
