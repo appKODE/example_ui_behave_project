@@ -2,6 +2,7 @@ image: butomo1989/docker-android-x86-7.1.1
 
 before_script:
   - python3 --version
+  - uname -a
   - apt-get install python3-pip
 
 stages:
