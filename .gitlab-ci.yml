@@ -3,7 +3,7 @@ image: butomo1989/docker-android-x86-7.1.1
 before_script:
   - python3 --version
   - uname -a
-  - sudo apt-get install python3-pip
+  - easy_install3 pip
 
 stages:
   - test
