@@ -9,7 +9,7 @@ before_script:
   - export PATH=$ANDROID_HOME/tools:$PATH
   - export PATH=/usr/local/share/chromedriver:$PATH
   - echo $PATH
-  - node -v
+  - /usr/bin/appium
 stages:
   - test
 
