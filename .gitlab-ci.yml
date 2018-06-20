@@ -11,7 +11,7 @@ test:
   only:
    - master
   tags:
-   - qa-serv
+   - qa-appium
   script:
    - pip install -r requirements.txt
    - pytest -v main.py
