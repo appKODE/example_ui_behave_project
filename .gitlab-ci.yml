@@ -1,5 +1,3 @@
-# image: butomo1989/docker-android-x86-7.1.1
-
 before_script:
   - python --version
 
@@ -13,6 +11,6 @@ test:
   tags:
    - qa-serv
   script:
-   - python3 -m pip install -r requirements.txt
-   - python3 -m pytest -v main.py
+   - pip install -r requirements.txt
+   - pytest -v main.py
 
