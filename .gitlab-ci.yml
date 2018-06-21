@@ -1,5 +1,6 @@
 before_script:
   - python --version
+  - ls /home/kode/android-ut-builds/
 
 stages:
   - test
