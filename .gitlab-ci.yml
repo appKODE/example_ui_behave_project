@@ -1,7 +1,6 @@
 before_script:
   - python --version
-  - mkdir -p /qa-builds
-  - ls /qa-builds
+  - ls /home/kode/android-ut-builds
 
 stages:
   - test
