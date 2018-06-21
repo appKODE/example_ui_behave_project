@@ -1,6 +1,7 @@
 before_script:
   - python --version
   - mkdir -p /builds
+  - ls /builds
 
 stages:
   - test
