@@ -1,4 +1,5 @@
 import os
+from os.path import isfile, join, abspath, dirname, getmtime
 from time import sleep
 
 import pytest
@@ -6,9 +7,14 @@ import pytest
 from appium import webdriver
 
 # Returns abs path relative to this file and not cwd
-PATH = lambda p: os.path.abspath(
-    os.path.join(os.path.dirname(__file__), p)
+PATH = lambda p: abspath(
+    join(dirname(__file__), p)
 )
+
+def get_recent_file(mypath):
+    files_tuple = [(f, int(getmtime(join(mypath,f)))) for f in os.listdir(mypath) if isfile(join(mypath, f))]
+    sort_by_update = sorted(files_tuple, key=lambda file: file[1])
+    return sort_by_update[-1][0]
 
 class UITestsDriver:
     def __init__(self):
@@ -30,4 +36,4 @@ class TestUM:
 
     def test_find_elements(self):
         sleep(5)
-        el = self.uidriver.driver.find_element_by_id('com.appkode.utair.dev:id/onboardingPageImag')
+        el = self.uidriver.driver.find_element_by_id('com.appkode.utair.dev:id/onboardingPageImage')
