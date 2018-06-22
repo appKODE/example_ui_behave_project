@@ -18,13 +18,14 @@ def get_recent_file(mypath):
 
 class UITestsDriver:
     def __init__(self):
+        recent_file = get_recent_file('/qa-builds')
+        full_path = '/home/kode/android-ut-builds/{}'.format(recent_file)
         desired_caps = {}
         desired_caps['platformName'] = 'Android'
         desired_caps['platformVersion'] = '7.0'
         desired_caps['deviceName'] = 'Android Emulator'
-        desired_caps['app'] = PATH('/home/kode/android-ut-builds/Utair-4.14.344.dev.int-vc50-18062018.apk')
+        desired_caps['app'] = PATH(full_path)
         self.driver = webdriver.Remote('http://192.168.100.95:4723/wd/hub', desired_caps)
-        print(get_recent_file('/qa-builds'))
 
 
 class TestUM:
