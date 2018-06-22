@@ -1,40 +1,42 @@
-from element import BasePageElement
+import os
+from os.path import isfile, join, abspath, dirname, getmtime
+from appium import webdriver
 from locators import MainPageLocators
 
-class SearchTextElement(BasePageElement):
-    """This class gets the search text from the specified locator"""
 
-    #The locator for search box where search string is entered
-    locator = 'q'
+# Returns abs path relative to this file and not cwd
+PATH = lambda p: abspath(
+    join(dirname(__file__), p)
+)
 
-
-class BasePage(object):
-    """Base class to initialize the base page that will be called from all pages"""
-
-    def __init__(self, driver):
-        self.driver = driver
+def get_recent_file(mypath):
+    files_tuple = [(f, int(getmtime(join(mypath, f)))) for f in os.listdir(mypath) if isfile(join(mypath, f))]
+    sort_by_update = sorted(files_tuple, key=lambda file: file[1])
+    return sort_by_update[-1][0]
 
 
-class MainPage(BasePage):
-    """Home page action methods come here. I.e. Python.org"""
+class UITestsDriver:
+    def __init__(self):
+        recent_file = get_recent_file('/qa-builds')
+        full_path = '/home/kode/android-ut-builds/{}'.format(recent_file)
+        desired_caps = {
+            'platformName': 'Android',
+            'platformVersion': '7.0',
+            'deviceName': 'Android Emulator',
+            'app': PATH(full_path)
+            }
+        self.driver = webdriver.Remote('http://192.168.100.95:4723/wd/hub', desired_caps)
 
-    #Declares a variable that will contain the retrieved text
-    search_text_element = SearchTextElement()
 
-    def is_title_matches(self):
-        """Verifies that the hardcoded text "Python" appears in page title"""
-        return "Python" in self.driver.title
+class MainPage(UITestsDriver):
+    """Home page action methods come here."""
 
-    def click_go_button(self):
+    def click_onboarding(self):
         """Triggers the search"""
-        element = self.driver.find_element(*MainPageLocators.GO_BUTTON)
+        element = self.driver.find_element(*MainPageLocators.ONBOARDING_PAGE)
         element.click()
 
 
-class SearchResultsPage(BasePage):
+class CheckinPage(UITestsDriver):
     """Search results page action methods come here"""
-
-    def is_results_found(self):
-        # Probably should search for this text in the specific page
-        # element, but as for now it works fine
-        return "No results found." not in self.driver.page_source
+    pass
