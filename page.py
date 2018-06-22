@@ -16,7 +16,7 @@ class MainPage(BasePage):
 
     def swipe_onboarding(self):
         size = self.driver.get_window_size()
-        startx, starty = int(size['width']) * 0.8, int(size['height']) * 0.5
+        startx, starty = int(size['width']) - 10, int(size['height']) * 0.5
         endx, endy = int(size['width']) * 0.2, int(size['height']) * 0.5
         self.driver.swipe(startx, starty, endx, endy, 300)
 
