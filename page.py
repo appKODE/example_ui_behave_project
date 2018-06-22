@@ -36,6 +36,11 @@ class MainPage(UITestsDriver):
         element = self.driver.find_element(*MainPageLocators.ONBOARDING_PAGE)
         element.click()
 
+    def swipe_onboarding(self):
+        size = self.driver.get_window_size()
+        startx, starty = int(size['width']) * 0.8, int(size['height']) * 0.5
+        endx, endy = int(size['width']) * 0.2, int(size['height']) * 0.5
+        self.driver.swipe(startx, starty, endx, endy, 4000)
 
 class CheckinPage(UITestsDriver):
     """Search results page action methods come here"""

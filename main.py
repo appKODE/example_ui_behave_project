@@ -10,3 +10,4 @@ class TestUM:
         main_page = MainPage()
         sleep(6)
         main_page.click_onboarding()
+        main_page.swipe_onboarding()
