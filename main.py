@@ -29,7 +29,7 @@ class TestUM:
         }
         self.driver = webdriver.Remote('http://192.168.100.95:4723/wd/hub', desired_caps)
 
-    def tear_down(self):
+    def teardown_class(self):
         self.driver.quit()
 
     def test_find_elements(self):
