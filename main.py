@@ -30,4 +30,4 @@ class TestUM:
 
     def test_find_elements(self):
         sleep(5)
-        el = self.uidriver.driver.find_element_by_id('com.appkode.utair.dev:id/onboardingPageImage')
+        el = self.uidriver.driver.find_element_by_id('com.appkode.utair.dev:id/onboardingPageImag')
