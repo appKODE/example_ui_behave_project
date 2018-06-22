@@ -1,6 +1,6 @@
 before_script:
   - python --version
-  - mkdir /qa-builds
+  - mkdir -p /qa-builds
   - ls /qa-builds
 
 stages:
