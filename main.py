@@ -18,6 +18,7 @@ class UITestsDriver:
         desired_caps['deviceName'] = 'Android Emulator'
         desired_caps['app'] = PATH('/home/kode/android-ut-builds/Utair-4.14.344.dev.int-vc50-18062018.apk')
         self.driver = webdriver.Remote('http://192.168.100.95:4723/wd/hub', desired_caps)
+        print(os.getcwd())
 
 
 class TestUM:
@@ -30,5 +31,3 @@ class TestUM:
     def test_find_elements(self):
         sleep(5)
         el = self.uidriver.driver.find_element_by_id('com.appkode.utair.dev:id/onboardingPageImage')
-
-print(os.getcwd())
