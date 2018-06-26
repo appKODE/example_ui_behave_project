@@ -17,6 +17,15 @@ def get_recent_file(mypath):
     return sort_by_update[-1][0]
 
 
+def get_bundle(filename):
+    if 'dev' in filename:
+        return 'dev'
+    elif 'alpha' in filename:
+        return 'alpha'
+    else:
+        return 'release'
+
+
 class TestUM:
     def setup_class(self):
         recent_file = get_recent_file('/qa-builds')
@@ -27,13 +36,14 @@ class TestUM:
             'deviceName': 'Android Emulator',
             'app': PATH(full_path)
         }
+        self.bundle = get_bundle(recent_file)
         self.driver = webdriver.Remote('http://192.168.100.95:4723/wd/hub', desired_caps)
 
     def teardown_class(self):
         self.driver.quit()
 
     def test_find_elements(self):
-        main_page = MainPage(self.driver)
+        main_page = MainPage(self.driver, self.bundle)
         sleep(6)
         main_page.click_onboarding()
         main_page.swipe_onboarding()

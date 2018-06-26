@@ -3,15 +3,20 @@ from locators import MainPageLocators
 class BasePage(object):
     """Base class to initialize the base page that will be called from all pages"""
 
-    def __init__(self, driver):
+    def __init__(self, driver, bundle):
         self.driver = driver
+        self.bundle = bundle
+
 
 class MainPage(BasePage):
     """Home page action methods come here."""
 
     def click_onboarding(self):
         """Triggers the search"""
-        element = self.driver.find_element(*MainPageLocators.ONBOARDING_PAGE)
+        element = self.driver.find_element(
+            MainPageLocators.ONBOARDING_PAGE[0],
+            MainPageLocators.ONBOARDING_PAGE[1].format(self.bundle)
+        )
         element.click()
 
     def swipe_onboarding(self):
