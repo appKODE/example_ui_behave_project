@@ -19,11 +19,11 @@ def get_recent_file(mypath):
 
 def get_bundle(filename):
     if 'dev' in filename:
-        return 'dev'
+        return 'com.appkode.utair.dev'
     elif 'alpha' in filename:
-        return 'alpha'
+        return 'com.appkode.utair.alpha'
     else:
-        return 'release'
+        return 'ru.utair.android'
 
 
 class TestUM:
