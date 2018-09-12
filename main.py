@@ -37,7 +37,7 @@ class TestUM:
             'app': PATH(full_path)
         }
         self.bundle = get_bundle(recent_file)
-        self.driver = webdriver.Remote('http://qa.appkode.ru:4723/wd/hub', desired_caps)
+        self.driver = webdriver.Remote('http://192.168.100.74:4723/wd/hub', desired_caps)
 
     def teardown_class(self):
         self.driver.quit()
