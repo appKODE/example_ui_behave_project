@@ -25,7 +25,7 @@ def get_bundle(filename):
 
 
 def get_capabilities():
-    recent_file = get_recent_file('/qa-builds')
+    recent_file = get_recent_file('/home/kode/android-ut-builds')
     full_path = '/home/kode/android-ut-builds/{}'.format(recent_file)
     desired_caps = {'platformName': 'Android', 'platformVersion': '7.0', 'app': PATH(full_path)}
     return desired_caps
