@@ -2,7 +2,7 @@ import os
 from os.path import isfile, join, abspath, dirname, getmtime
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from features.configs import *
+from features.helpers.configs import *
 
 # Returns abs path relative to this file and not cwd
 PATH = lambda p: abspath(

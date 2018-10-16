@@ -1,7 +1,7 @@
 from behave import *
 from selenium.webdriver.common.by import By
-from features.utils import assert_element_found, do_swipe_jesture
-from features.locators import *
+from features.helpers.utils import assert_element_found, do_swipe_jesture
+from features.helpers.locators import *
 use_step_matcher("re")
 
 
