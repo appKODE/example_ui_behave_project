@@ -1,19 +1,7 @@
 from behave import *
 from selenium.webdriver.common.by import By
+from features.utils import assert_element_found, do_swipe_jesture
 use_step_matcher("re")
-
-
-@then("user sees finish button")
-def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    start = context.driver.find_element(By.ID, '{}:id/onboardingPageImage')
-    try:
-        assert start.is_displayed() is True
-    except AssertionError as error:
-        error.args += ('Activity didn`t start',)
-        raise
 
 
 @given("activity started normally")
@@ -22,12 +10,8 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     assert context.driver
-    on_board = context.driver.find_element(By.ID, '%s:id/onboardingPageImage' % context.bundle)
-    try:
-        assert on_board.is_displayed() is True
-    except AssertionError as error:
-        error.args += ('Onboarding not displayed',)
-        raise
+    element = (By.ID, '%s:id/onboardingPageTitle' % context.bundle)
+    assert_element_found(context, element, text='Покупайте авиабилеты быстрее, чем за 2 минуты')
 
 
 @then("user swipes on-boarding")
@@ -35,4 +19,22 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    pass
+    texts = [
+        'Регистрируйтесь на рейс меньше, чем за 49 секунд',
+        'Печатайте посадочные билеты с помощью терминалов в аэропорту',
+        'Следите за бонусным балансом'
+    ]
+    for text in texts:
+        do_swipe_jesture(context)
+        element = (By.ID, '%s:id/onboardingPageTitle' % context.bundle)
+        assert_element_found(context, element, text=text)
+
+
+@then("user sees finish button")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    element = (By.ID, '%s:id/beginButton' % context.bundle)
+    result = assert_element_found(context, element)
+    result.click()
