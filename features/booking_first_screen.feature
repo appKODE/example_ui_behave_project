@@ -8,3 +8,4 @@ Feature: Booking first screen operations
     Then user chooses date of flight
     Then user chooses cities
     Then user chooses passengers
+    Then user clicks Next

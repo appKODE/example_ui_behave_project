@@ -1,6 +1,5 @@
 from behave import *
-from selenium.webdriver.common.by import By
-from features.helpers.utils import assert_element_found, do_swipe_jesture
+from features.helpers.utils import assert_element_found, do_swipe_jesture, set_bundle_to_locator
 from features.helpers.locators import *
 use_step_matcher("re")
 
@@ -11,7 +10,7 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     assert context.driver
-    element = (By.ID, ONBOARD_TITLE % context.bundle)
+    element = set_bundle_to_locator(ONBOARD_TITLE, context.bundle)
     assert_element_found(context, element, text='Покупайте авиабилеты быстрее, чем за 2 минуты')
 
 
@@ -27,7 +26,7 @@ def step_impl(context):
     ]
     for text in texts:
         do_swipe_jesture(context)
-        element = (By.ID, ONBOARD_TITLE % context.bundle)
+        element = set_bundle_to_locator(ONBOARD_TITLE, context.bundle)
         assert_element_found(context, element, text=text)
 
 
@@ -36,6 +35,6 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    element = (By.ID, BEGIN_BUTTON % context.bundle)
+    element = set_bundle_to_locator(BEGIN_BUTTON, context.bundle)
     result = assert_element_found(context, element)
     result.click()

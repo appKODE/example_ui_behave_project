@@ -1,8 +1,10 @@
 import os
 from os.path import isfile, join, abspath, dirname, getmtime
+from random import choice
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from features.helpers.configs import *
+from features.helpers.locators import DATE_CANCEL, DATE_OK
 
 # Returns abs path relative to this file and not cwd
 PATH = lambda p: abspath(
@@ -54,4 +56,50 @@ def assert_element_found(context, element, text=None):
             return context.driver.find_element(*element)
     except AssertionError as error:
         error.args += ('Element with text "%s" is not displayed' % text,)
+        raise
+
+
+def assert_elements_found(context, element, text=None):
+    WebDriverWait(context.driver, 120).until(
+        EC.presence_of_element_located(element)
+    )
+    try:
+        if text:
+            result = [item for item in context.driver.find_elements(*element) if item.text == text]
+            assert result
+            assert result[0].is_displayed() is True
+            return result[0]
+        else:
+            assert context.driver.find_elements(*element)[0].is_displayed() is True
+            return context.driver.find_elements(*element)[0]
+    except AssertionError as error:
+        error.args += ('Element with text "%s" is not displayed' % text,)
+        raise
+
+
+def set_bundle_to_locator(locator, bundle):
+    return (locator[0], locator[1] % bundle)
+
+
+def click_result(context, element):
+    result = assert_element_found(context, element)
+    result.click()
+
+
+def date_picker(context, element):
+    WebDriverWait(context.driver, 120).until(
+        EC.presence_of_element_located(element)
+    )
+    try:
+        result = [item for item in context.driver.find_elements(*element) if item.is_enabled()]
+        none = set_bundle_to_locator(DATE_CANCEL, context.bundle)
+        if result:
+            new_element = choice(result)
+            new_element.click()
+            new_element = set_bundle_to_locator(DATE_OK, context.bundle)
+            click_result(context, new_element)
+        else:
+            context.driver.find_element(*none).click()
+    except AssertionError as error:
+        error.args += ('Date is not displayed',)
         raise
