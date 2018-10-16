@@ -32,8 +32,8 @@ def get_capabilities():
 
 
 def before_all(context):
-    context.driver = webdriver.Remote('http://192.168.100.95:4723/wd/hub', get_capabilities())
-    recent_file = get_recent_file('/qa-builds')
+    context.driver = webdriver.Remote('http://192.168.100.74:4723/wd/hub', get_capabilities())
+    recent_file = get_recent_file('/home/kode/android-ut-builds')
     context.bundle = get_bundle(recent_file)
 
 
