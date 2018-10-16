@@ -81,8 +81,8 @@ def set_bundle_to_locator(locator, bundle):
     return (locator[0], locator[1] % bundle)
 
 
-def click_result(context, element):
-    result = assert_element_found(context, element)
+def click_result(context, element, text=None):
+    result = assert_element_found(context, element, text=text)
     result.click()
 
 

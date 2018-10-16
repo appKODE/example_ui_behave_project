@@ -1,5 +1,5 @@
 from behave import *
-from features.helpers.utils import assert_element_found, assert_elements_found, \
+from features.helpers.utils import assert_elements_found, \
     set_bundle_to_locator, click_result, date_picker
 from features.helpers.locators import *
 use_step_matcher("re")
@@ -12,9 +12,10 @@ def step_impl(context):
     """
     assert context.driver
     assert context.bundle
+
     element = set_bundle_to_locator(PROFILE, context.bundle)
-    result = assert_element_found(context, element)
-    result.click()
+    click_result(context, element)
+
     element = TABBAR
     result = assert_elements_found(context, element, text='ПОКУПКА')
     result.click()
@@ -44,16 +45,22 @@ def step_impl(context):
     date_picker(context, element)
 
 
-
 @then("user chooses cities")
 def step_impl(context):
     """
     :type context: behave.runner.Context
     """
     element = set_bundle_to_locator(FROM, context.bundle)
-    assert_element_found(context, element)
+    click_result(context, element)
+
+    element = set_bundle_to_locator(CITY, context.bundle)
+    click_result(context, element, text='Москва')
+
     element = set_bundle_to_locator(TO, context.bundle)
-    assert_element_found(context, element)
+    click_result(context, element)
+
+    element = set_bundle_to_locator(CITY, context.bundle)
+    click_result(context, element, text='Сургут')
 
 
 @then("user chooses passengers")
