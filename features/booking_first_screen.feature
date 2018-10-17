@@ -5,7 +5,11 @@ Feature: Booking first screen operations
   Scenario: Do date, city, passengers changes
     # Enter steps here
     Given the screen is open
-    Then user chooses date of flight
-    Then user chooses cities
+    Then user closes profile sign
+    Then user chooses booking tab
+    Then user chooses date of flight to
+    Then user chooses date of flight back
+    Then user chooses city from
+    Then user chooses city to
     Then user chooses passengers
     Then user clicks Next

@@ -49,6 +49,7 @@ def assert_element_found(context, element, text=None):
     try:
         if text:
             assert context.driver.find_element(*element).is_displayed() is True
+            r = context.driver.find_element(*element)
             assert context.driver.find_element(*element).text == text
             return context.driver.find_element(*element)
         else:
