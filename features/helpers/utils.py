@@ -104,3 +104,22 @@ def date_picker(context, element):
     except AssertionError as error:
         error.args += ('Date is not displayed',)
         raise
+
+
+def do_scroll_jesture(context, direction):
+    """
+    :param context: behave.runner.Context
+    :param direction: 'up' or 'down'
+    :return: None
+    """
+    if direction == 'down':
+        size = context.driver.get_window_size()
+        startx, starty = int(size['width']) * 0.5, int(size['height']) * 0.9
+        endx, endy = int(size['width']) * 0.5, int(size['height']) * 0.2
+        context.driver.swipe(startx, starty, endx, endy, 300)
+        print('scrolled!')
+    elif direction == 'up':
+        size = context.driver.get_window_size()
+        startx, starty = int(size['width']) * 0.5, int(size['height']) * 0.2
+        endx, endy = int(size['width']) * 0.5, int(size['height']) * 0.9
+        context.driver.swipe(startx, starty, endx, endy, 300)

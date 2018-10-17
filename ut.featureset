@@ -1,2 +1,3 @@
 features/onboarding.feature
 features/booking_first_screen.feature
+features/flight_selection.feature
