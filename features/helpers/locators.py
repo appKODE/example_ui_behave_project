@@ -59,3 +59,5 @@ FLIGHT_AIRPORTS = (By.ID, '%s:id/flightNumberAirports')
 DURATION = (By.ID, '%s:id/duration')
 VEHICLE = (By.ID, '%s:id/vehicle')
 LAYOVER_TIME = (By.ID, '%s:id/segmentLayoverInfo')
+
+# группа локаторов выбора тарифов

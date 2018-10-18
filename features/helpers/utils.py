@@ -28,8 +28,8 @@ def get_bundle(filename):
 
 
 def get_capabilities():
-    recent_file = get_recent_file(HOME_LOCATION)
-    full_path = '{}{}'.format(HOME_LOCATION, recent_file)
+    recent_file = get_recent_file(DOCKER_LOCATION)
+    full_path = '{}{}'.format(REMOTE_LOCATION, recent_file)
     desired_caps = CAPS
     desired_caps["app"] = PATH(full_path)
     return desired_caps
@@ -111,7 +111,6 @@ def do_scroll_jesture(context, direction):
         startx, starty = int(size['width']) * 0.5, int(size['height']) * 0.9
         endx, endy = int(size['width']) * 0.5, int(size['height']) * 0.2
         context.driver.swipe(startx, starty, endx, endy, 300)
-        print('scrolled!')
     elif direction == 'up':
         size = context.driver.get_window_size()
         startx, starty = int(size['width']) * 0.5, int(size['height']) * 0.2
