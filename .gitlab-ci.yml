@@ -9,10 +9,9 @@ stages:
 test:
   stage: test
   only:
-   - master
+   - yn
   tags:
    - qa-serv
   script:
    - pip install -r requirements.txt
-   - pytest -v main.py
-
+   - behave @ut.featureset
