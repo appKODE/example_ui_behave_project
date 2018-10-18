@@ -37,8 +37,8 @@ def get_capabilities():
 
 def do_swipe_jesture(context):
     size = context.driver.get_window_size()
-    startx, starty = int(size['width']) - 40, int(size['height']) * 0.5
-    endx, endy = int(size['width']) * 0.2, int(size['height']) * 0.5
+    startx, starty = int(size['width']) * 0.7 int(size['height']) * 0.5
+    endx, endy = int(size['width']) * 0.1, int(size['height']) * 0.5
     context.driver.swipe(startx, starty, endx, endy, 300)
 
 
