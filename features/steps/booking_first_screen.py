@@ -23,7 +23,7 @@ def step_impl(context):
 def step_impl(context):
 
     element = TABBAR
-    assert_elements_found(context, element, text='ПОКУПКА').click()
+    assert_elements_found(context, element, text='Покупка').click()
 
 
 @then("user chooses date of flight to")
