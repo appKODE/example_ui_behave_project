@@ -36,5 +36,4 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     element = set_bundle_to_locator(BEGIN_BUTTON, context.bundle)
-    result = assert_element_found(context, element)
-    result.click()
+    assert_element_found(context, element).click()

@@ -1,7 +1,7 @@
 from behave import *
-from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
 from features.helpers.utils import assert_elements_found, \
-    set_bundle_to_locator, click_result, do_scroll_jesture, \
+    set_bundle_to_locator, do_scroll_jesture, \
     assert_element_found
 from features.helpers.locators import *
 use_step_matcher("re")
@@ -41,10 +41,10 @@ def step_impl(context):
 def step_impl(context):
 
     element = set_bundle_to_locator(BY_FLIGHT_PRICE, context.bundle)
-    click_result(context, element)
+    assert_element_found(context, element).click()
 
     element = set_bundle_to_locator(BY_FLIGHT_TIME, context.bundle)
-    click_result(context, element)
+    assert_element_found(context, element).click()
 
 
 @then("find direct flight")
@@ -77,28 +77,39 @@ def step_impl(context):
 def step_impl(context):
 
     element = set_bundle_to_locator(STOP_OVER_FOOTER, context.bundle)
-    while(not EC.presence_of_element_located(element)):
+    for i in range(5):
         do_scroll_jesture(context, 'down')
+    sleep(1)
+    assert_element_found(context, element, text='Пересадка').click()
 
 
 @then("assure layover flight elements are present")
 def step_impl(context):
-    pass
 
+    element = set_bundle_to_locator(STOP_OVER_FOOTER_EXP, context.bundle)
+    assert_element_found(context, element)
 
-@then("hit layover flight footer")
-def step_impl(context):
+    element = set_bundle_to_locator(FLIGHT_INTERVAL, context.bundle)
+    assert_element_found(context, element)
 
-    pass
+    element = set_bundle_to_locator(BY_FLIGHT_PRICE, context.bundle)
+    assert_element_found(context, element)
 
+    element = set_bundle_to_locator(FLIGHT_AIRPORTS, context.bundle)
+    assert_element_found(context, element)
 
-@then("assure footers elements are present")
-def step_impl(context):
+    element = set_bundle_to_locator(DURATION, context.bundle)
+    assert_element_found(context, element)
 
-    pass
+    element = set_bundle_to_locator(VEHICLE, context.bundle)
+    assert_element_found(context, element)
+
+    element = set_bundle_to_locator(LAYOVER_TIME, context.bundle)
+    assert_element_found(context, element)
 
 
 @then("choose certain flight")
 def step_impl(context):
 
-    pass
+    element = set_bundle_to_locator(DIRECT_FLIGHT_CARD, context.bundle)
+    assert_element_found(context, element).click()

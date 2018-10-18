@@ -49,8 +49,7 @@ def assert_element_found(context, element, text=None):
     try:
         if text:
             assert context.driver.find_element(*element).is_displayed() is True
-            r = context.driver.find_element(*element)
-            assert context.driver.find_element(*element).text == text
+            assert text in context.driver.find_element(*element).text
             return context.driver.find_element(*element)
         else:
             assert context.driver.find_element(*element).is_displayed() is True
@@ -66,7 +65,7 @@ def assert_elements_found(context, element, text=None):
     )
     try:
         if text:
-            result = [item for item in context.driver.find_elements(*element) if item.text == text]
+            result = [item for item in context.driver.find_elements(*element) if text in item.text]
             assert result
             assert result[0].is_displayed() is True
             return result[0]
@@ -82,11 +81,6 @@ def set_bundle_to_locator(locator, bundle):
     return (locator[0], locator[1] % bundle)
 
 
-def click_result(context, element, text=None):
-    result = assert_element_found(context, element, text=text)
-    result.click()
-
-
 def date_picker(context, element):
     WebDriverWait(context.driver, 120).until(
         EC.presence_of_element_located(element)
@@ -98,7 +92,7 @@ def date_picker(context, element):
             new_element = choice(result)
             new_element.click()
             new_element = set_bundle_to_locator(DATE_OK, context.bundle)
-            click_result(context, new_element)
+            assert_element_found(context, new_element).click()
         else:
             context.driver.find_element(*none).click()
     except AssertionError as error:

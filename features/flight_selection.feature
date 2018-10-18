@@ -12,6 +12,4 @@ Feature: Here we select flight for passenger
     Then assure direct flight elements are present
     Then find the layover flight
     Then assure layover flight elements are present
-    Then hit layover flight footer
-    Then assure footers elements are present
     Then choose certain flight
