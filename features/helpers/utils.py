@@ -41,7 +41,6 @@ def do_swipe_jesture(context):
     startx, starty = int(size['width']) * 0.7, int(size['height']) * 0.5
     endx, endy = int(size['width']) * 0.1, int(size['height']) * 0.5
     context.driver.swipe(startx, starty, endx, endy, 300)
-    sleep(1)
 
 
 def assert_element_found(context, element, text=None):

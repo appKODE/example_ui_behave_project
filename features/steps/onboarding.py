@@ -1,4 +1,5 @@
 from behave import *
+from time import sleep
 from features.helpers.utils import assert_element_found, do_swipe_jesture, set_bundle_to_locator
 from features.helpers.locators import *
 use_step_matcher("re")
@@ -26,6 +27,7 @@ def step_impl(context):
     ]
     for text in texts:
         do_swipe_jesture(context)
+        sleep(1)
         element = set_bundle_to_locator(ONBOARD_TITLE, context.bundle)
         assert_element_found(context, element, text=text)
 
