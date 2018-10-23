@@ -27,7 +27,7 @@ def step_impl(context):
     ]
     for text in texts:
         do_swipe_jesture(context)
-        sleep(1)
+        sleep(2)
         element = set_bundle_to_locator(ONBOARD_TITLE, context.bundle)
         assert_element_found(context, element, text=text)
 
