@@ -32,7 +32,7 @@ class TestUM:
         full_path = '/home/kode/android-ut-builds/{}'.format(recent_file)
         desired_caps = {
             'platformName': 'Android',
-            'platformVersion': '7.0',
+            'platformVersion': '6.0',
             'deviceName': 'Android Emulator',
             'app': PATH(full_path)
         }
