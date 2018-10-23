@@ -79,7 +79,7 @@ def step_impl(context):
     element = set_bundle_to_locator(STOP_OVER_FOOTER, context.bundle)
     for i in range(5):
         do_scroll_jesture(context, 'down')
-    sleep(1)
+        sleep(2)
     assert_element_found(context, element, text='Пересадка').click()
 
 
