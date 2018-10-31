@@ -9,7 +9,7 @@ stages:
 test:
   stage: test
   only:
-   - yn
+   - master
   tags:
    - qa-serv
   script:
