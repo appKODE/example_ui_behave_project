@@ -21,9 +21,13 @@ def step_impl(context):
 
 @then("user chooses booking tab")
 def step_impl(context):
+    if context.driver.capabilities.get('desired').get('platformVersion') == '7.0':
+        text = 'ПОКУПКА'
+    else:
+        text = 'Покупка'
 
     element = TABBAR
-    assert_elements_found(context, element, text='Покупка').click()
+    assert_elements_found(context, element, text=text).click()
 
 
 @then("user chooses date of flight to")
