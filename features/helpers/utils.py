@@ -1,7 +1,7 @@
 import os
 from os.path import isfile, join, abspath, dirname, getmtime
 from random import choice
-from time import sleep
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from features.helpers.configs import *
@@ -44,10 +44,10 @@ def do_swipe_jesture(context):
 
 
 def assert_element_found(context, element, text=None):
-    WebDriverWait(context.driver, 120).until(
-        EC.presence_of_element_located(element)
-    )
     try:
+        WebDriverWait(context.driver, 120).until(
+            EC.presence_of_element_located(element)
+        )
         if text:
             assert context.driver.find_element(*element).is_displayed() is True
             assert text in context.driver.find_element(*element).text
@@ -56,15 +56,16 @@ def assert_element_found(context, element, text=None):
             assert context.driver.find_element(*element).is_displayed() is True
             return context.driver.find_element(*element)
     except AssertionError as error:
-        error.args += ('Element with text "%s" is not displayed' % text,)
+        screenshotBase64 = context.driver.get_screenshot_as_base64()
+        error.args += ('Element with text "%s" is not displayed' % text, screenshotBase64)
         raise
 
 
 def assert_elements_found(context, element, text=None):
-    WebDriverWait(context.driver, 120).until(
-        EC.presence_of_element_located(element)
-    )
     try:
+        WebDriverWait(context.driver, 120).until(
+            EC.presence_of_element_located(element)
+        )
         if text:
             result = [item for item in context.driver.find_elements(*element) if text in item.text]
             assert result
@@ -83,10 +84,11 @@ def set_bundle_to_locator(locator, bundle):
 
 
 def date_picker(context, element):
-    WebDriverWait(context.driver, 120).until(
-        EC.presence_of_element_located(element)
-    )
+
     try:
+        WebDriverWait(context.driver, 120).until(
+            EC.presence_of_element_located(element)
+        )
         result = [item for item in context.driver.find_elements(*element) if item.is_enabled()]
         none = set_bundle_to_locator(DATE_CANCEL, context.bundle)
         if result:
