@@ -82,12 +82,6 @@ def step_impl(context):
     elements = set_bundle_to_locator(TARIFF_BACKGROUND, context.bundle)
     assert_elements_found(context, elements)
 
-    elements = set_bundle_to_locator(TARIFF_TITLE, context.bundle)
-    assert_elements_found(context, elements, text='Стандарт').click()
-
-    element = TARIFF_DISABLE
-    assert_element_found(context, element)
-
     context.tariff.click()
 
     element = set_bundle_to_locator(TOTAL_PRICE_DESC, context.bundle)
