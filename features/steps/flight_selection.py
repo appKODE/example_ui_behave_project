@@ -92,22 +92,13 @@ def step_impl(context):
     element = set_bundle_to_locator(STOP_OVER_FOOTER_EXP, context.bundle)
     assert_element_found(context, element)
 
-    element = set_bundle_to_locator(FLIGHT_INTERVAL, context.bundle)
+    element = set_bundle_to_locator(SEG_ARRIVAL_TIME, context.bundle)
     assert_element_found(context, element)
 
-    element = set_bundle_to_locator(BY_FLIGHT_PRICE, context.bundle)
+    element = set_bundle_to_locator(SEG_DEPARTURE_TIME, context.bundle)
     assert_element_found(context, element)
 
-    element = set_bundle_to_locator(FLIGHT_AIRPORTS, context.bundle)
-    assert_element_found(context, element)
-
-    element = set_bundle_to_locator(DURATION, context.bundle)
-    assert_element_found(context, element)
-
-    element = set_bundle_to_locator(VEHICLE, context.bundle)
-    assert_element_found(context, element)
-
-    element = set_bundle_to_locator(LAYOVER_TIME, context.bundle)
+    element = set_bundle_to_locator(SEG_AIRPORTS_INFO, context.bundle)
     assert_element_found(context, element)
 
 
