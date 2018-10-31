@@ -38,7 +38,7 @@ SEARCH_BUTTON = (By.ID, '%s:id/primaryButton')
 CITY = (By.ID, '%s:id/cityName')
 
 # группа локаторов на экране выбора Рейса Туда
-HEADER = (By.ID, '%s:id/stationsView')
+HEADER = (By.ID, '%s:id/toolbar')
 STEP = (By.ID, '%s:id/topProgressView')
 DATE_CAROUSEL = (By.ID, '%s:id/calendarLayout')
 DATE_CAROUSEL_MIN_PRICE = (By.ID, '%s:id/minPrice')
