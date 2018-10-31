@@ -57,7 +57,10 @@ def step_impl(context):
 @then("assure direct flight elements are present")
 def step_impl(context):
 
-    element = set_bundle_to_locator(FLIGHT_INTERVAL, context.bundle)
+    element = set_bundle_to_locator(ARRIVAL_TIME, context.bundle)
+    assert_element_found(context, element)
+
+    element = set_bundle_to_locator(DEPARTURE_TIME, context.bundle)
     assert_element_found(context, element)
 
     element = set_bundle_to_locator(BY_FLIGHT_PRICE, context.bundle)
