@@ -106,4 +106,7 @@ def step_impl(context):
 def step_impl(context):
 
     element = set_bundle_to_locator(DIRECT_FLIGHT_CARD, context.bundle)
+    assert_element_found(context, element)
+
+    element = set_bundle_to_locator(SEARCH_BUTTON, context.bundle)
     assert_element_found(context, element).click()

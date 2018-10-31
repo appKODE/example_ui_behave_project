@@ -53,9 +53,6 @@ def step_impl(context):
     """
     context.tariff.click()
 
-    element = set_bundle_to_locator(TARIFF_EXPANDER, context.bundle)
-    assert_element_found(context, element).click()
-
     elements = set_bundle_to_locator(TARIFF_SERVICE_TITLE, context.bundle)
     assert_elements_found(context, elements)
 
@@ -88,11 +85,8 @@ def step_impl(context):
     elements = set_bundle_to_locator(TARIFF_TITLE, context.bundle)
     assert_elements_found(context, elements, text='Стандарт').click()
 
-    element = TARIFF_COMBINE_MESSAGE
+    element = TARIFF_DISABLE
     assert_element_found(context, element)
-
-    element = OK
-    assert_element_found(context, element).click()
 
     context.tariff.click()
 
