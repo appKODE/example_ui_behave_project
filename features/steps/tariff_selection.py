@@ -20,8 +20,9 @@ def step_impl(context):
     elements = set_bundle_to_locator(TARIFF_BACKGROUND, context.bundle)
     assert_elements_found(context, elements)
 
-    element = set_bundle_to_locator(TARIFF_TITLE, context.bundle)
-    context.tariff = assert_element_found(context, element, text='Лайт')
+    elements = set_bundle_to_locator(TARIFF_TITLE, context.bundle)
+    context.tariff = assert_elements_found(context, elements, text='Лайт')
+    print(context.tariff)
 
     element = set_bundle_to_locator(TOTAL_PRICE_DESC, context.bundle)
     assert_element_found(context, element)
@@ -51,13 +52,12 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    context.tariff.click()
 
     elements = set_bundle_to_locator(TARIFF_SERVICE_TITLE, context.bundle)
     assert_elements_found(context, elements)
 
     elements = set_bundle_to_locator(TARIFF_SERVICE_VALUE, context.bundle)
-    context.tariff = assert_elements_found(context, elements)
+    assert_elements_found(context, elements)
 
 
 @then("assure tariffs sum and common sum are equal")
@@ -80,9 +80,7 @@ def step_impl(context):
     assert_elements_found(context, elements, text='Шаг 4 из 7. Выберите тариф «Обратно»')
 
     elements = set_bundle_to_locator(TARIFF_BACKGROUND, context.bundle)
-    assert_elements_found(context, elements)
-
-    context.tariff.click()
+    assert_elements_found(context, elements).click()
 
     element = set_bundle_to_locator(TOTAL_PRICE_DESC, context.bundle)
     assert_element_found(context, element)
