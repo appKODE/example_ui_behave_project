@@ -1,11 +1,8 @@
 import os
 from os.path import isfile, join, abspath, dirname, getmtime
-from random import choice
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from features.helpers.configs import *
-from features.helpers.locators import DATE_CANCEL, DATE_OK
 
 # Returns abs path relative to this file and not cwd
 PATH = lambda p: abspath(
@@ -29,8 +26,8 @@ def get_bundle(filename):
 
 
 def get_capabilities():
-    recent_file = get_recent_file(DOCKER_LOCATION)
-    full_path = '{}{}'.format(REMOTE_LOCATION, recent_file)
+    recent_file = get_recent_file(HOME_LOCATION)
+    full_path = '{}{}'.format(HOME_LOCATION, recent_file)
     desired_caps = CAPS
     desired_caps["app"] = PATH(full_path)
     return desired_caps
@@ -56,66 +53,9 @@ def assert_element_found(context, element, text=None):
             assert context.driver.find_element(*element).is_displayed() is True
             return context.driver.find_element(*element)
     except AssertionError as error:
-        screenshotBase64 = context.driver.get_screenshot_as_base64()
-        error.args += ('Element with text "%s" is not displayed' % text, screenshotBase64)
-        raise
-
-
-def assert_elements_found(context, element, text=None):
-    try:
-        WebDriverWait(context.driver, 120).until(
-            EC.presence_of_element_located(element)
-        )
-        if text:
-            result = [item for item in context.driver.find_elements(*element) if text in item.text]
-            assert result
-            assert result[0].is_displayed() is True
-            return result[0]
-        else:
-            assert context.driver.find_elements(*element)[0].is_displayed() is True
-            return context.driver.find_elements(*element)[0]
-    except AssertionError as error:
-        error.args += ('Element with text "%s" is not displayed' % text,)
+        error.args += ('Element with text "%s" is not displayed' % text)
         raise
 
 
 def set_bundle_to_locator(locator, bundle):
     return (locator[0], locator[1] % bundle)
-
-
-def date_picker(context, element):
-
-    try:
-        WebDriverWait(context.driver, 120).until(
-            EC.presence_of_element_located(element)
-        )
-        result = [item for item in context.driver.find_elements(*element) if item.is_enabled()]
-        none = set_bundle_to_locator(DATE_CANCEL, context.bundle)
-        if result:
-            new_element = choice(result)
-            new_element.click()
-            new_element = set_bundle_to_locator(DATE_OK, context.bundle)
-            assert_element_found(context, new_element).click()
-        else:
-            context.driver.find_element(*none).click()
-    except AssertionError as error:
-        error.args += ('Date is not displayed',)
-        raise
-
-
-def do_scroll_jesture(context, direction):
-    """
-    :param context: behave.runner.Context
-    :param direction: 'up' or 'down'
-    :return: None
-    """
-    if direction == 'down':
-        size = context.driver.get_window_size()
-        startx, starty = int(size['width']) * 0.5, int(size['height']) * 0.9
-        endx, endy = int(size['width']) * 0.5, int(size['height']) * 0.2
-        context.driver.swipe(startx, starty, endx, endy, 300)
-    elif direction == 'up':
-        size = context.driver.get_window_size()
-        startx, starty = int(size['width']) * 0.5, int(size['height']) * 0.2
-        endx, endy = int(size['width']) * 0.5, int(size['height']) * 0.9
-        context.driver.swipe(startx, starty, endx, endy, 300)
